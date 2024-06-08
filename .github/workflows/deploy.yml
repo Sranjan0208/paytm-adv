@@ -22,7 +22,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./Dockerfile
+          file: ./docker/Dockerfile.user
           push: true
           tags: erenlevi/paytm-adv
       - name: Verify Pushed Image
