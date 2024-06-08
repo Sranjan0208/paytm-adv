@@ -32,7 +32,6 @@ export default function Layout({
   );
 }
 
-// Icons Fetched from https://heroicons.com/
 function HomeIcon() {
   return (
     <svg
