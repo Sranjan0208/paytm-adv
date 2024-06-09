@@ -26,4 +26,16 @@ jobs:
           push: true
           tags: erenlevi/paytm-adv
       - name: Verify Pushed Image
-        run: docker pull 100xdevs/web-app:latest
+        run: docker pull erenlevi/paytm-adv:latest
+
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            sudo docker pull erenlevi/paytm-adv:latest
+            sudo docker stop paytm-adv || true
+            sudo docker rm paytm-adv || true
+            sudo docker run -d --name paytm-adv -p 3005:3000 erenlevi/paytm-adv:latest
